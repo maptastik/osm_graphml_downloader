@@ -4,7 +4,7 @@ import osmnx as ox
 def osm_graphml_downloader(network_type,
         out_dir,
         filename = None,
-        bbox = [-78.893509, 35.677936, -78.453369, 36.028555],
+        bbox = None,
         reproject = False,
         epsg_code = 2264):
     
