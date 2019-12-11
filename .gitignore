@@ -132,3 +132,4 @@ dmypy.json
 # User-defined
 *.vscode*
 test_output*
+*.bat
