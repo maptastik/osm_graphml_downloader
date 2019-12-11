@@ -12,6 +12,7 @@ Download .graphml of various network types from OpenStreetMap. This tool extends
 -w  --west          required  Area of interest west extent
 --reproject                   Option to reproject graph from WGS84 to something else
 --epsg_code                   EPSG code value. Only used if --reproject flag is used
+--simplify                    Option to download a simplified network
 ```
 
 ### Usage Examples
@@ -31,7 +32,7 @@ python osm_graphml_downloader_cli.py -x walk -o "C:\Data Directory" -n 35.802884
 This example demonstrates what the CLI call would look like if set values for all the options.
 
 ```bash
-python osm_graphml_downloader_cli.py -x walk -o "C:\Data Directory" -f neighborhood_walk_2264 -n 35.802884 -s 35.793138 -e -78.597478 -w -78.612413 --reproject --epsg_code 2264
+python osm_graphml_downloader_cli.py -x walk -o "C:\Data Directory" -f neighborhood_walk_2264 -n 35.802884 -s 35.793138 -e -78.597478 -w -78.612413 --reproject --epsg_code 2264 --simplify
 
 # C:\Data Directory\neighborhood_walk_2264.graphml
 ```

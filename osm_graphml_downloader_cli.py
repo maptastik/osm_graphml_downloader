@@ -15,13 +15,15 @@ from osm_graphml_downloader import osm_graphml_downloader
 @click.option('-w', '--west', help = 'Area of interest west extent', type = float)
 @click.option('--reproject', is_flag = True, help = 'Option to reproject the graph from WGS84 to something else')
 @click.option('--epsg_code', help = 'EPSG code value. Only used if --reproject flag is used', default = 2264)
-def main(network_type, out_dir, filename, north, south, east, west, reproject, epsg_code):
+@click.option('--simplify', is_flag = True, help = 'Option to download a simplified network.')
+def main(network_type, out_dir, filename, north, south, east, west, reproject, epsg_code, simplify):
     osm_graphml_downloader(network_type = network_type,
                          out_dir = out_dir,
                          filename = filename,
                          bbox = [west, south, east, north],
                          reproject = reproject,
-                         epsg_code = int(epsg_code))
+                         epsg_code = int(epsg_code),
+                         simplify = simplify)
 
     end = perf_counter()
     completion_seconds = end - start
