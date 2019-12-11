@@ -1,7 +1,7 @@
 import os
 import osmnx as ox
 
-def osm_graph_downloader(network_type,
+def osm_graphml_downloader(network_type,
         out_dir,
         filename = None,
         bbox = [-78.893509, 35.677936, -78.453369, 36.028555],
