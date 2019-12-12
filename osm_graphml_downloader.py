@@ -6,7 +6,7 @@ def osm_graphml_downloader(network_type,
         filename = None,
         bbox = None,
         reproject = False,
-        epsg_code = 2264,
+        epsg_code = None,
         simplify = False):
     
     network_type_list = ["walk", "bike", "drive", "drive_service", "all", "all_private", "none"]
@@ -25,8 +25,12 @@ def osm_graphml_downloader(network_type,
     graph = ox.graph_from_bbox(bbox[3], bbox[1], bbox[2], bbox[0], network_type = network_type, simplify = simplify)
 
     if reproject:
-        print(f"Reprojecting to {epsg_code}...")
-        epsg_string = f'epsg:{epsg_code}'
+        if epsg_code:
+            print(f"Reprojecting to {epsg_code}...")
+            epsg_string = f'epsg:{epsg_code}'
+        else:
+            print(f"Reprojecting to UTM...")
+            epsg_string = None
         graph = ox.project_graph(graph, to_crs = epsg_string)
     
     print("Saving graph...")
