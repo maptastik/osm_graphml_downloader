@@ -1,6 +1,26 @@
 # OSM GraphML Downloader
 Download .graphml of various network types from OpenStreetMap. This tool extends the fabulous [osmnx](https://github.com/gboeing/osmnx) library from Geoff Boeing.
 
+## Installation
+
+### Unhelpful Instructions
+
+Download this repository
+
+Install osmnx (v0.11+) and click
+
+### Anaconda
+
+This tool has been tested most using Anaconda to manage the dependencies. An example of you might setup an environment using Anaconda's conda CLI tool is:
+
+```bash
+conda create -n osm_graphml_downloader
+activate osm_graphml_downloader
+conda install osmnx>=0.11 click -y
+```
+
+Then you can use your new environment to run this tool.
+
 ## CLI
 ```
 -x  --network_type  required  Network type: walk, bike, drive, drive_service, all, all_private, none
