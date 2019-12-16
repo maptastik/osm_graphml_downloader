@@ -1,5 +1,5 @@
 # OSM GraphML Downloader
-Download .graphml of various network types from OpenStreetMap. This tool extends the fabulous (osmnx)[https://github.com/gboeing/osmnx] library from Geoff Boeing.
+Download .graphml of various network types from OpenStreetMap. This tool extends the fabulous [osmnx](https://github.com/gboeing/osmnx) library from Geoff Boeing.
 
 ## CLI
 ```
