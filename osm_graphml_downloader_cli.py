@@ -1,6 +1,9 @@
 from time import perf_counter
 start = perf_counter()
 
+import os
+import shutil
+import gzip
 import click
 from datetime import timedelta
 from osm_graphml_downloader import osm_graphml_downloader
@@ -16,7 +19,8 @@ from osm_graphml_downloader import osm_graphml_downloader
 @click.option('--reproject', is_flag = True, help = 'Option to reproject the graph from WGS84 to something else')
 @click.option('--epsg_code', help = 'EPSG code value. Only used if --reproject flag is used')
 @click.option('--simplify', is_flag = True, help = 'Option to download a simplified network.')
-def main(network_type, out_dir, filename, north, south, east, west, reproject, epsg_code, simplify):
+@click.option('--compress', is_flag = True, help = 'Compress final output using gzip.')
+def main(network_type, out_dir, filename, north, south, east, west, reproject, epsg_code, simplify, compress):
     if epsg_code is not None:
         epsg_code = int(epsg_code)
     osm_graphml_downloader(network_type = network_type,
@@ -26,6 +30,25 @@ def main(network_type, out_dir, filename, north, south, east, west, reproject, e
                          reproject = reproject,
                          epsg_code = epsg_code,
                          simplify = simplify)
+    
+    if compress:
+        print("Compressing results...")
+        if filename is None:
+            filename = f'graph_{network_type}.graphml'
+        else:
+            filename_no_extension = filename.split('.')[0]
+            filename = f'{filename_no_extension}.graphml'
+        print('filename:', filename)
+        downloaded_graph = os.path.join(out_dir, filename)
+        print('downloaded_graph:', downloaded_graph)
+
+        try:
+            with open(downloaded_graph, 'rb') as f_in:
+                with gzip.open(f"{downloaded_graph}.gz", 'wb') as f_out:
+                    shutil.copyfileobj(f_in, f_out)
+            os.remove(downloaded_graph)
+        except Exception as e:
+            print(e)
 
     end = perf_counter()
     completion_seconds = end - start
