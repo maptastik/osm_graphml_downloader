@@ -16,17 +16,19 @@ from osm_graphml_downloader import osm_graphml_downloader
 @click.option('-s', '--south', help = 'Area of interest south extent', type = float)
 @click.option('-e', '--east', help = 'Area of interest east extent', type = float)
 @click.option('-w', '--west', help = 'Area of interest west extent', type = float)
+@click.option('--custom_filter', help = 'Custom filter')
 @click.option('--reproject', is_flag = True, help = 'Option to reproject the graph from WGS84 to something else')
 @click.option('--epsg_code', help = 'EPSG code value. Only used if --reproject flag is used')
 @click.option('--simplify', is_flag = True, help = 'Option to download a simplified network.')
 @click.option('--compress', is_flag = True, help = 'Compress final output using gzip.')
-def main(network_type, out_dir, filename, north, south, east, west, reproject, epsg_code, simplify, compress):
+def main(network_type, out_dir, filename, north, south, east, west, custom_filter, reproject, epsg_code, simplify, compress):
     if epsg_code is not None:
         epsg_code = int(epsg_code)
     osm_graphml_downloader(network_type = network_type,
                          out_dir = out_dir,
                          filename = filename,
                          bbox = [west, south, east, north],
+                         custom_filter = custom_filter,
                          reproject = reproject,
                          epsg_code = epsg_code,
                          simplify = simplify)
