@@ -17,8 +17,6 @@ def osm_graphml_downloader(network_type,
 
     if custom_filter is not None:
         custom_filter = (custom_filter).format(settings.default_access)
-        print(custom_filter)
-        print(type(custom_filter))
 
     if filename is None:
         filename = f'graph_{network_type}.graphml'
